@@ -17,10 +17,58 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
+const SITE_URL = "https://cafe-demo-six.vercel.app";
+
 export const metadata: Metadata = {
-  title: "KURO COFFEE | 神楽坂の静かな珈琲店",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "KURO COFFEE | 神楽坂の静かな珈琲店",
+    template: "%s | KURO COFFEE",
+  },
   description:
-    "東京・神楽坂の路地裏。日常から少し離れる、静かな一杯を。自家焙煎・サイフォン抽出。23時まで営業。",
+    "東京・神楽坂の路地裏。日常から少し離れる、静かな一杯を。自家焙煎・サイフォン抽出。23時まで営業。KURO COFFEE（クロ コーヒー）公式サイト。",
+  keywords: ["KURO COFFEE", "クロコーヒー", "神楽坂", "カフェ", "珈琲", "自家焙煎", "サイフォン"],
+  openGraph: {
+    title: "KURO COFFEE | 神楽坂の静かな珈琲店",
+    description: "東京・神楽坂の路地裏。日常から少し離れる、静かな一杯を。",
+    url: SITE_URL,
+    siteName: "KURO COFFEE",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KURO COFFEE | 神楽坂の静かな珈琲店",
+    description: "東京・神楽坂の路地裏。日常から少し離れる、静かな一杯を。",
+  },
+  robots: { index: true, follow: true },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  name: "KURO COFFEE",
+  alternateName: "クロ コーヒー",
+  url: SITE_URL,
+  description: "神楽坂の静かな珈琲店。自家焙煎・サイフォン抽出。",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "神楽坂 3-X-X",
+    addressLocality: "新宿区",
+    addressRegion: "東京都",
+    postalCode: "162-0825",
+    addressCountry: "JP",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "11:00",
+      closes: "23:00",
+    },
+  ],
+  priceRange: "¥¥",
+  servesCuisine: "Coffee",
 };
 
 export default function RootLayout({
@@ -29,6 +77,10 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${noto.variable} ${cormorant.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
