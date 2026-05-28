@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description: "東京・神楽坂の路地裏。日常から少し離れる、静かな一杯を。",
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "wyEdPRxnfZVIMWl1GdbRYYlkMwORmVToasrupponrBg",
+  },
 };
 
 const jsonLd = {
