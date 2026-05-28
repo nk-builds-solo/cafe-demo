@@ -21,6 +21,9 @@ const SITE_URL = "https://cafe-demo-six.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: "KURO COFFEE",
+  authors: [{ name: "KURO COFFEE" }],
+  publisher: "KURO COFFEE",
   title: {
     default: "KURO COFFEE | 神楽坂の静かな珈琲店",
     template: "%s | KURO COFFEE",
@@ -49,7 +52,27 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "CafeOrCoffeeShop",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "KURO COFFEE",
+      alternateName: ["クロ コーヒー", "KURO COFFEE 神楽坂"],
+      description: "神楽坂の静かな珈琲店",
+      inLanguage: "ja",
+      publisher: { "@id": `${SITE_URL}/#org` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#org`,
+      name: "KURO COFFEE",
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+    },
+    {
+      "@type": "CafeOrCoffeeShop",
+      "@id": `${SITE_URL}/#cafe`,
   name: "KURO COFFEE",
   alternateName: "クロ コーヒー",
   url: SITE_URL,
@@ -72,6 +95,8 @@ const jsonLd = {
   ],
   priceRange: "¥¥",
   servesCuisine: "Coffee",
+    },
+  ],
 };
 
 export default function RootLayout({
